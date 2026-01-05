@@ -24,12 +24,12 @@ const Sidebar = ({ onCategoryChange }: { onCategoryChange: (id: string) => void 
         border-b md:border-b-0 border-slate-400/40
       "
     >
-      {/* عنوان السايدبار */}
+      {/* Sidebar Title */}
       <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6 md:mb-8">
         CATEGORIES
       </h2>
 
-      {/* اللينكات */}
+      {/* Links */}
       <ul className="space-y-2 sm:space-y-3 md:space-y-5">
         {links.map((link) => (
           <li key={link.id}>

@@ -150,7 +150,7 @@ export default function Example() {
           </button>
         </div>
 
-      {/* Cards تحت الزر */}
+      {/* Cards Below Button */}
 <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-5xl mx-auto w-full">
   {/* Email Card */}
   <div className="p-4 sm:p-5 md:p-6 rounded-xl text-center hover:scale-105 transition-transform duration-300 shadow-xl border border-slate-700">

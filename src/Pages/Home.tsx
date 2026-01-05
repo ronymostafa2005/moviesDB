@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Card from "../Componentes/CardsComopnents/Card";
 import Pagination from "../Componentes/Pagination/Pagination";
+import Loader from "../Componentes/Loader/Loader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 export default function Home() {
@@ -15,13 +16,21 @@ export default function Home() {
 
   const [movies, setMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const itemsPerPage = 8;
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${import.meta.env.VITE_API_KEY}`)
       .then((response) => response.json())
-      .then((data) => setMovies(data.results))
-      .catch(() => toast.error("Error fetching trending movies ❌"));
+      .then((data) => {
+        setMovies(data.results);
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("Error fetching trending movies ❌");
+        setLoading(false);
+      });
   }, []);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -29,6 +38,10 @@ export default function Home() {
   const currentMovies = movies.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(movies.length / itemsPerPage);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10 mt-20 sm:mt-24 md:mt-32 lg:mt-40">

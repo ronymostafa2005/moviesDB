@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../Componentes/layout/Sidebar";
 import Card from "../Componentes/CardsComopnents/Card";
 import Pagination from "../Componentes/Pagination/Pagination";
+import Loader from "../Componentes/Loader/Loader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFire } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,14 +13,14 @@ export default function Trending() {
   >([]);
   const [loading, setLoading] = useState(true);
 
-  // حالة الصفحات
+  // Page state
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // عدد العناصر لكل صفحة
+  const itemsPerPage = 8; // Items per page
 
   const API_KEY = import.meta.env.VITE_API_KEY;
   const BASE_URL = "https://api.themoviedb.org/3";
 
-  // جلب البيانات حسب الكاتيجوري
+  // Fetch data by category
   const fetchContent = async (cat: string) => {
     setLoading(true);
     try {
@@ -48,11 +49,11 @@ export default function Trending() {
   };
 
   useEffect(() => {
-    setCurrentPage(1); // رجع الصفحة الأولى عند تغيير الكاتيجوري
+    setCurrentPage(1); // Reset to first page when category changes
     fetchContent(category);
   }, [category]);
 
-  // حساب المحتوى الحالي للصفحة
+  // Calculate current page content
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentContent = content.slice(indexOfFirstItem, indexOfLastItem);
@@ -73,7 +74,7 @@ export default function Trending() {
         </h1>
 
         {loading ? (
-          <p className="text-gray-400">Loading...</p>
+          <Loader />
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">

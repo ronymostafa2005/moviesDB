@@ -41,7 +41,7 @@ export default function Pagination({
 
   return (
     <div className="flex justify-center items-center gap-1 sm:gap-2 mt-4 sm:mt-6 mb-6 sm:mb-10 flex-wrap px-2">
-      {/* زر الرجوع */}
+      {/* Previous Button */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -50,7 +50,7 @@ export default function Pagination({
         Prev
       </button>
 
-      {/* الصفحات */}
+      {/* Pages */}
       {getVisiblePages().map((page, index) => (
         page === '...' ? (
           <span key={`ellipsis-${index}`} className="px-2 text-gray-400 text-xs sm:text-sm">
@@ -71,7 +71,7 @@ export default function Pagination({
         )
       ))}
 
-      {/* زر التقدم */}
+      {/* Next Button */}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

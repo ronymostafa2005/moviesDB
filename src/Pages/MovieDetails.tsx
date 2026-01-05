@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Loader from "../Componentes/Loader/Loader";
 
 interface MovieDetails {
   title: string;
@@ -18,14 +19,24 @@ interface MovieDetails {
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState<MovieDetails | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}`
     )
       .then((res) => res.json())
-      .then((data) => setMovie(data));
+      .then((data) => {
+        setMovie(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, [id]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   if (!movie) return null;
 

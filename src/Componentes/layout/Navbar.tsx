@@ -80,7 +80,7 @@ export default function Navbar() {
           </svg>
         </button>
 
-        {/* الخط + النجمة + النص - Desktop Only */}
+        {/* Line + Star + Text - Desktop Only */}
         <div className="hidden lg:flex items-center gap-2">
           <div className="w-1 h-8 self-start bg-gray-700"></div>
           <FontAwesomeIcon icon={faStar} className="text-[#ffd43b]" />
